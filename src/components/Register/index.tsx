@@ -4,7 +4,6 @@ import { Form, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { useNavigate } from 'react-router-dom';
-import { getApi } from '../../redux/apis';
 import { registerAction } from '../../redux/slice/registerSlice';
 import { toastText } from '../../utils/utils';
 
@@ -93,7 +92,7 @@ const RegisterComponent = () => {
 
                 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" loading={loading}>
                         Register
                     </Button>
                 </Form.Item>
