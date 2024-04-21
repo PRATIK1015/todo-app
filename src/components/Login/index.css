@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    height: 100vh; /* Set height to full viewport height */
+}
+.left-div {
+    /* flex: 1; Take up half of the available space */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    background-color: #f0f0f0; /* Optional: Background color for left div */
+}
+.right-div {
+    flex: 1; /* Take up half of the available space */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    background-color: #e5eef6;/* Optional: Background color for right div */
+}

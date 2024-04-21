@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { router } from "./router";
+import { RouterProvider } from "react-router-dom";
 function App() {
+  const state = useSelector((state: any) => state?.userCheck);
+  // if (state?.isLoggedIn === true) {
+  //   location.href = `${window.location.origin}/login`;
+  // }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouterProvider router={router} /> 
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        containerClassName="toast-container-custom"
+        toastOptions={{
+          success: {
+            style: {
+              backgroundColor: "#009049",
+              color: "#fff",
+              fontSize: "16px",
+            },
+          },
+          error: {
+            style: {
+              backgroundColor: "red",
+              color: "#fff",
+              fontSize: "16px",
+            },
+          },
+        }}
+      />
     </div>
   );
 }

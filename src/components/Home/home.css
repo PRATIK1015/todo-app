@@ -1,0 +1,11 @@
+.container-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Optional: Center the content vertically */
+  }
+  

@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.table-global{
+  border-radius: 10%;
+  color: rgb(221, 224, 224);
+}
