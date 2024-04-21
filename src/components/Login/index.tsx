@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormProps, Button, Checkbox, Image } from 'antd'
 import { Form, Input } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { loginAction } from '../../redux/actions/loginAction';
 import { fetchtask } from '../../redux/actions/taskAction';
@@ -17,7 +17,7 @@ type FieldType = {
     password?: string;
     remember?: string;
 };
-
+const state = useSelector((state: any) => state?.auth);
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
 
         dispatch(loginAction(values) as any)
@@ -76,7 +76,7 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
                     </Form.Item>
     
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" loading={state?.loading}>
                             log in
                         </Button>
                     </Form.Item>

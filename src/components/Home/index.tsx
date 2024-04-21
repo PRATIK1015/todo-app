@@ -37,6 +37,7 @@ const HomeComponent = () => {
   const { data,isLoading } = useSelector((state: any) => state?.task);
   const { data: userData } = useSelector((state: any) => state?.profile);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [addtaskLoading, setAddtaskLoading] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
 
   const [selectedTask, setSelectedTask] = useState<any>();
@@ -63,11 +64,9 @@ const HomeComponent = () => {
         dispatch(fetchtask());
         toastText(res?.data?.message ?? "task deleted successfully", "success");
       }
-      // setIsLoading(false);
     })
       .catch((error: any) => {
         toastText(error?.response?.data?.error?.message ?? "Fail to delete task", "error");
-        // setIsLoading(false);
       });
   }
   const handleCancel = () => {
@@ -84,17 +83,16 @@ const HomeComponent = () => {
     setIsModalOpen(true)
   }
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    setAddtaskLoading(true)
     if (selectedTask) {
       await putApi('/task/edittask', { ...values, id: selectedTask.id }).then(async (res: any) => {
         if (res?.status === 200) {
           dispatch(fetchtask());
           toastText(res?.data?.message ?? "task updated successfully", "success");
         }
-        // setIsLoading(false);
       })
         .catch((error: any) => {
           toastText(error?.response?.data?.error?.message ?? "Fail to update task", "error");
-          // setIsLoading(false);
         });
 
     } else {
@@ -103,13 +101,12 @@ const HomeComponent = () => {
           dispatch(fetchtask());
           toastText(res?.data?.message ?? "task created successfully", "success");
         }
-        // setIsLoading(false);
       })
         .catch((error: any) => {
           toastText(error?.response?.data?.error?.message ?? "Fail to create task", "error");
-          // setIsLoading(false);
         });
     }
+    setAddtaskLoading(false)
     handleCancel()
     // };
   }
@@ -188,7 +185,7 @@ const HomeComponent = () => {
                       footer: (_, { OkBtn, CancelBtn }) => (
                         <>
                           <CancelBtn />
-                          <OkBtn />
+                          <OkBtn/>
                         </>
                       ),
                     });
@@ -243,7 +240,7 @@ const HomeComponent = () => {
 
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={addtaskLoading}>
               {selectedTask ? "Update Task" : "Create Task"}
             </Button>
           </Form.Item>
